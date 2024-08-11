@@ -35,7 +35,7 @@
             <div v-for="item in channel.airings" class="flex-1 w-64 p-2 border rounded-md">
                 <div class="font-bold text-2xl flex justify-between">
                     <span>{{ item.title }}</span>
-                    <span>{{ formatTime(item.date) }}</span>
+                    <span>{{ formatTime(item.date) }}&ndash;{{ calculateFinishTime(item.date, item.duration) }}</span>
                 </div>
                 <div class="text-xl">{{ item.synopsis }}</div>
                 <div v-if="item.remaining" class="mt-2">
@@ -53,6 +53,12 @@ import { ref, onMounted } from "vue";
 const tvGuide = ref(null)
 const channelsArray = ["9HD", "10 HD", "ABC TV HD", "SBS", "SBS Food", "7HD"]
 const loading = ref(false)
+
+function calculateFinishTime(start, duration) {
+    let startDate = new Date(start)
+    console.log(startDate.getTime())
+    return formatTime(new Date(startDate.getTime() + (duration * 60 * 1000)))
+}
 
 const formatTime = (input) => {
     let options = { hour: "numeric", minute: "numeric", hour12: true };
