@@ -56,7 +56,6 @@ const loading = ref(false)
 
 function calculateFinishTime(start, duration) {
     let startDate = new Date(start)
-    console.log(startDate.getTime())
     return formatTime(new Date(startDate.getTime() + (duration * 60 * 1000)))
 }
 
