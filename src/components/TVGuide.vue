@@ -12,12 +12,32 @@
 
         <div v-for="channel in tvGuide" class="flex mb-5 gap-3">
             <div class="flex-none w-32">
+                <div v-if="channel.name == '9HD'">
+                    <img src="@/assets/logos/nine.png" />
+                </div>
+                <div v-if="channel.name == 'ABC TV HD'">
+                    <img src="@/assets/logos/abc.png" />
+                </div>
+                <div v-if="channel.name == 'SBS'">
+                    <img src="@/assets/logos/sbs.png" />
+                </div>
+                <div v-if="channel.name == 'SBS Food'">
+                    <img src="@/assets/logos/sbs-food.png" />
+                </div>
+                <div v-if="channel.name == '7HD'">
+                    <img src="@/assets/logos/seven.png" />
+                </div>
+                <div v-if="channel.name == '10 HD'">
+                    <img src="@/assets/logos/ten.png" />
+                </div>
                 {{ channel.name }}
             </div>
             <div v-for="item in channel.airings" class="flex-1 w-64 p-2 border rounded-md">
-                <div class="font-bold text-2xl">{{ item.title }}</div>
+                <div class="font-bold text-2xl flex justify-between">
+                    <span>{{ item.title }}</span>
+                    <span>{{ formatTime(item.date) }}</span>
+                </div>
                 <div class="text-xl">{{ item.synopsis }}</div>
-
                 <div v-if="item.remaining" class="mt-2">
                     <progress class="progress w-56 mr-10" :value="item.percent" max="100" />
                     <span>{{ item.remaining }} min remaining</span>
@@ -25,8 +45,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <pre>{{ tvGuide }}</pre> -->
 </template>
 
 <script setup>
